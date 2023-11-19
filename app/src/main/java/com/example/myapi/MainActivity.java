@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,11 +22,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView tv = (TextView) findViewById(R.id.hello);
-        String url = "https://jsonplaceholder.typicode.com/todos/1";
+        String url = "http://10.0.2.2:5274/api/pokemon/1";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                tv.setText(response.toString());
+                try {
+                    int id = response.getInt("id");
+                    String name = response.getString("name");
+                    String birthDate = response.getString("birthDate");
+//                    boolean abilities = response.getBoolean("abilities.is_hidden");
+
+                    tv.setText(id + "\n" + name + "\n" + birthDate + "\n");
+//                    tv.setText(base_experience);
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+
+                }
             }
         }, new Response.ErrorListener() {
             @Override
