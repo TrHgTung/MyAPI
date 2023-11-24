@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView tv = (TextView) findViewById(R.id.hello);
-        String url = "http://10.0.2.2:5274/api/pokemon/1";
+        String url = "http://10.0.2.2:5177/api/course/1";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
