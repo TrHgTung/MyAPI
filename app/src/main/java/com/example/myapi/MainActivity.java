@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,15 +23,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView tv = (TextView) findViewById(R.id.hello);
+//        String url = "https://jsonplaceholder.typicode.com/todos/1";
         String url = "http://10.0.2.2:5177/api/course/1";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     int id = response.getInt("id");
-                    String name = response.getString("name");
+                    String name = response.getString("title");
                     String birthDate = response.getString("birthDate");
-//                    boolean abilities = response.getBoolean("abilities.is_hidden");
+//                    boolean isComplete = response.getBoolean("completed");
 
                     tv.setText(id + "\n" + name + "\n" + birthDate + "\n");
 //                    tv.setText(base_experience);
